@@ -23,7 +23,7 @@ alias dps='docker ps'
 alias dm='docker-machine'
 alias dmstart="docker-machine start $DOCKER_MACHINE_NAME"
 alias dip="docker-machine ip $DOCKER_MACHINE_NAME"
-alias denv='docker-machine-env-docker'
+alias denv="eval "$(docker-machine env dockervm)""
 
 mv-downcase () { local f=`mktemp -u`; mv "$1" "$f" && mv "$f" $(tr "[:upper:]" "[:lower:]" <<< "$1"); }
 

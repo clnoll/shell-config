@@ -1,5 +1,5 @@
 TMUX_BASE_SESSION_NAME=base
-DIR=~/config/shell
+DIR=~/configfiles
 
 source $DIR/lib.sh
 source $DIR/lib_zsh.sh
