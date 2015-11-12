@@ -1,11 +1,10 @@
 _cwd=$(pwd)
-cd ~/src/1p/shell-config
-
+cd ~/configfiles/
 source lib.sh
-source path.sh
+# source path.sh
 source git-functions.sh
-source env.sh
-__dan_is_osx && source osx_env.sh
+# source env.sh
+# __dan_is_osx && source osx_env.sh
 source dircolors.sh
 source prompt.sh
 source bash/history.sh

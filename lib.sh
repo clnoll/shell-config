@@ -1,5 +1,3 @@
-. ~/src/1p/wifi/wifi.sh
-
 die () {
     echo "$@" >&2
     return 1

@@ -1,8 +1,8 @@
 # -*-coding: utf-8;-*-
 export __BLACK=30 __RED=31 __GREEN=32 __YELLOW=33 __BLUE=34 __MAGENTA=35 __CYAN=36 __WHITE=37
 export GIT_PS1_SHOWDIRTYSTATE=yes
-export GIT_PS1_UNSTAGED="અ "
-export GIT_PS1_STAGED="જ "
+export GIT_PS1_UNSTAGED="🐉  "
+export GIT_PS1_STAGED="🐠  "
 
 __prompt_command () {
     PS1=""
