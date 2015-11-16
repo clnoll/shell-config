@@ -31,7 +31,7 @@ __virtualenv_ps1 () {
 
 
 __docker_compose_ps1 () {
-    [ -n "$USE_DOCKER_COMPOSE_PS1" ] || return
+    [ -n "$(__find_file_upwards docker-compose.yml .)" ] || return
     local dc_ps1=""
     local containers=$(docker-compose ps -q 2>/dev/null)
     [ -n "$containers" ] || return
@@ -55,6 +55,21 @@ __docker_compose_ps1 () {
     dc_ps1=" ($dc_ps1)"
     dc_ps1=$(__colorize $__CYAN "$dc_ps1")
     echo -n "$dc_ps1"
+}
+
+
+# Find first occurrence of file in parent directories
+__find_file_upwards () {
+    local file="$1"
+    local dir=$(readlink -f "$2")
+
+    if [[ -f "$dir/$file" ]]; then
+        echo "$dir/$file"
+    elif [[ "$dir" = / ]]; then
+        echo
+    else
+        echo $(__find_file_upwards "$file" $(dirname "$dir"))
+    fi
 }
 
 

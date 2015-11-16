@@ -11,6 +11,7 @@ __colorize () {
     echo "\[\033[${1}m\]$2\[\033[0m\]"
 }
 
+
 git-fetch-branch () {
     git fetch origin $1:$1 && git checkout $1
 }
@@ -37,7 +38,7 @@ hub-commit-pr () {
 }
 
 switchto () {
-        workon $1 && cdproject
+    workon $1 && cdproject
 }
 
 git-prune-merged () {
