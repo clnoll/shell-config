@@ -27,3 +27,4 @@ cd "$_cwd"
 source $(which virtualenvwrapper.sh)
 export WORKON_HOME=$HOME/.virtualenvs
 export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
+alias subl="/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl"
