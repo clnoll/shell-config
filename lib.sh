@@ -1,3 +1,5 @@
+. ~/wifi/wifi.sh
+
 die () {
     echo "$@" >&2
     return 1
