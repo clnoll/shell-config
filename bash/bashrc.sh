@@ -1,7 +1,7 @@
 _cwd=$(pwd)
 
 export GIT_PS1_UNSTAGED="🐉  "
-export GIT_PS1_STAGED="🐠  "
+export GIT_PS1_STAGED="🎲  "
 
 cd ~/configfiles/
 source lib.sh
