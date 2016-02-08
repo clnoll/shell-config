@@ -7,11 +7,6 @@ __dan_is_osx () {
     [ -e /Applications ]
 }
 
-__colorize () {
-    echo "\[\033[${1}m\]$2\[\033[0m\]"
-}
-
-
 git-fetch-branch () {
     git fetch origin $1:$1 && git checkout $1
 }
@@ -42,7 +37,7 @@ switchto () {
 }
 
 git-prune-merged () {
-    gbd | head -n20 | awk '{print $1}' | while read b ; do git branch -d $b ; done
+    git branch-by-date | awk '{print $1}' | while read b ; do git branch -d $b ; done
 }
 
 ega () {
@@ -78,7 +73,7 @@ cd-site-packages () {
 }
 
 docker-machine-env-docker () {
-    eval "$(docker-machine env docker)"
+    eval "$(docker-machine env $DOCKER_MACHINE_NAME)"
 }
 
 docker-container-uri () {
@@ -107,5 +102,68 @@ docker-compose-exec () {
     while [[ "$1" == -* ]] ; do exec_args+=" $1" ; shift ; done
     local service="$1"
     shift
-    docker exec $exec_args $(docker-compose-get-container "$service") $@
+    docker exec $exec_args $(docker_compose_get_container "$service") $@
+}
+
+pip-local () {
+    PIP_INDEX_URL="http://$(docker-machine ip $DOCKER_MACHINE_NAME):5555/simple/" \
+    PIP_TRUSTED_HOST=$(docker-machine ip $DOCKER_MACHINE_NAME) \
+    pip $@
+}
+
+local-pypi () {
+    local port=${1:-5555}
+    local package_dir=~/tmp/packages
+    local image_name=simple-http-server
+    local container_name=$image_name
+    local dockerfile_dir=~/src/1p/dockerfiles/simple-http-server
+
+    (cd $dockerfile_dir && docker build -t $image_name .)
+    dir2pi $package_dir
+    docker rm -f $container_name 2> /dev/null
+    echo "Starting local PyPi server: http://$(docker-machine ip $DOCKER_MACHINE_NAME):$port"
+    docker run -p $port:80 --rm --name $container_name -v $package_dir:/srv simple-http-server
+}
+
+docker-build-with-local-pypi () {
+    docker build \
+       --build-arg PIP_TRUSTED_HOST=$(docker-machine ip $DOCKER_MACHINE_NAME) \
+       --build-arg PIP_INDEX_URL="http://$(docker-machine ip $DOCKER_MACHINE_NAME):5555/simple/" \
+       $@
+}
+
+
+cdp () { mkdir -p "$1" && cd "$1";}
+mv-downcase () { local f=`mktemp -u`; mv "$1" "$f" && mv "$f" $(tr "[:upper:]" "[:lower:]" <<< "$1"); }
+gt () { touch "$1" && git add "$1" ; }
+egt () { gt "$1" && e "$1" ; }
+gcf () { git checkout "$@" || git-fetch-branch "$@" ; }
+
+
+# toggle iTerm Dock icon
+# https://gist.github.com/CrazyApi/5377685
+# http://apple.stackexchange.com/questions/209250/remove-iterm-from-cmdtab-apps?rq=1
+# http://apple.stackexchange.com/questions/92004/is-there-a-way-to-hide-certain-apps-from-the-cmdtab-menu
+toggle-iterm () {
+    pb='/usr/libexec/PlistBuddy'
+    iTerm='/Applications/iTerm.app/Contents/Info.plist'
+
+    echo "Do you wish to hide iTerm in Dock?"
+    select ync in "Hide" "Show" "Cancel"; do
+        case $ync in
+            'Hide' )
+                $pb -c "Add :LSUIElement bool true" $iTerm
+                echo "relaunch iTerm to take effectives"
+                break
+                ;;
+            'Show' )
+                $pb -c "Delete :LSUIElement" $iTerm
+                echo "run killall 'iTerm' to exit, and then relaunch it"
+                break
+                ;;
+        'Cancel' )
+            break
+            ;;
+        esac
+    done
 }
