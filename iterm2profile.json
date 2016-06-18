@@ -4,21 +4,60 @@
       "Name": "Me",
       "Guid": "50D92499-D3FA-4D0A-972A-6B85F523EC0A",
       "Keyboard Map" : {
-        "0xf700-0x300000" : {
-          "Text" : "0x1a 0x1b 0x5a 0x41",
-          "Action" : 11
+        "0xf703-0x320000" : {
+          "Text" : "0x1a 0x70",
+          "Action" : 11,
+          "Description": "Next window"
         },
-        "0xf703-0x300000" : {
-          "Text" : "0x1a 0x1b 0x5a 0x43",
-          "Action" : 11
+        "0x73-0x100000" : {
+          "Text" : "0x1a 0x5b",
+          "Action" : 11,
+          "Description": "Scroll mode"
         },
         "0xf702-0x300000" : {
-          "Text" : "0x1a 0x1b 0x5a 0x44",
-          "Action" : 11
+          "Action" : 11,
+          "Text" : "0x1a 0x1b 0x5b 0x44",
+          "Description": "Pane left"
+        },
+        "0x78-0x100000" : {
+          "Text" : "0x1a 0x78",
+          "Action" : 11,
+          "Description": "Kill pane"
+        },
+        "0x2f-0x100000" : {
+          "Text" : "0x1a 0x77",
+          "Action" : 11,
+          "Description": "Choose window"
+        },
+        "0xf700-0x300000" : {
+          "Action" : 11,
+          "Text" : "0x1a 0x1b 0x5b 0x41",
+          "Description": "Pane up"
+        },
+        "0x2b-0x120000" : {
+          "Text" : "0x1a 0x63",
+          "Action" : 11,
+          "Description": "New window"
+        },
+        "0x5f-0x120000" : {
+          "Text" : "0x1a 0x22",
+          "Action" : 11,
+          "Description": "Split horizontally"
+        },
+        "0xf703-0x300000" : {
+          "Action" : 11,
+          "Text" : "0x1a 0x1b 0x5b 0x43",
+          "Description": "Pane right"
+        },
+        "0x7c-0x120000" : {
+          "Text" : "0x1a 0x25",
+          "Action" : 11,
+          "Description": "Split vertically"
         },
         "0xf701-0x300000" : {
-          "Text" : "0x1a 0x1b 0x5a 0x42",
-          "Action" : 11
+          "Action" : 11,
+          "Text" : "0x1a 0x1b 0x5b 0x42",
+          "Description": "Pane down"
         }
       }
     }
