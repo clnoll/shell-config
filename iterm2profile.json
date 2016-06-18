@@ -1,0 +1,26 @@
+{
+  "Profiles": [
+    {
+      "Name": "Me",
+      "Guid": "50D92499-D3FA-4D0A-972A-6B85F523EC0A",
+      "Keyboard Map" : {
+        "0xf700-0x300000" : {
+          "Text" : "0x1a 0x1b 0x5a 0x41",
+          "Action" : 11
+        },
+        "0xf703-0x300000" : {
+          "Text" : "0x1a 0x1b 0x5a 0x43",
+          "Action" : 11
+        },
+        "0xf702-0x300000" : {
+          "Text" : "0x1a 0x1b 0x5a 0x44",
+          "Action" : 11
+        },
+        "0xf701-0x300000" : {
+          "Text" : "0x1a 0x1b 0x5a 0x42",
+          "Action" : 11
+        }
+      }
+    }
+  ]
+}
