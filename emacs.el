@@ -40,6 +40,7 @@
    .
    (
     ;; insert pairs for global key bindings here
+    ("\C-cg" . magit-status)
     ([(backtab)] . dan/indent-shift-left)
     )))
 
