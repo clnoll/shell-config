@@ -64,13 +64,10 @@
 (dan/register-key-bindings
  '(global-map
    .
-   (
-    ;; insert pairs for global key bindings here
-    ("\C-cg" . magit-status)
+   (("\C-cg" . magit-status)
     ([(backtab)] . dan/indent-shift-left)
     ([(super /)] . comment-or-uncomment-region-or-line)
-    ([(super ?,)] . (lambda () (interactive) (find-file (file-chase-links "~/.emacs.d/init.el"))))
-    )))
+    ([(super ?,)] . (lambda () (interactive) (find-file (file-chase-links "~/.emacs.d/init.el")))))))
 
 
 ;; Hack to make tab indent the region when the region is active, and
