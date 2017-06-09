@@ -1,7 +1,14 @@
 (package-initialize)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 
+(use-package magit)
+(use-package undo-tree
+  :config
+  (undo-tree-mode 1))
+
 (load-file "~/dan-emacs-config/lib.el")
+
+(server-start)
 
 ;; appearance
 (load-theme 'railscasts t)
@@ -9,11 +16,26 @@
 (setq cursor-type 'bar)
 (blink-cursor-mode -1)
 (tool-bar-mode -1)
-
 (dan/set-show-paren-style)
+
+;; misc configuration
+(setq vc-follow-symlinks t)
+(global-linum-mode 1)
+
+;; scrolling
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+(setq mouse-wheel-progressive-speed nil)
+(setq mouse-wheel-follow-mouse 't)
+(setq linum-delay t)
+
 
 ;; tab completion
 (setq tab-always-indent 'complete)
+
+;; python
+(setq python-shell-interpreter "/usr/local/bin/ipython3"
+      python-shell-interpreter-args "-i")
+
 
 ;; mode hooks
 (require 'scheme)
@@ -30,6 +52,10 @@
     (paredit-mode 1)))
 (add-hook 'minibuffer-setup-hook 'dan/minibuffer-setup-hook-fn)
 
+(defun cnoll-kill-line ()
+  (interactive)
+  (beginning-of-line)
+  (kill-line))
 
 ;; key bindings
 ;; Look at https://github.com/dandavison/emacs-config/blob/master/emacs.el#L262
@@ -42,6 +68,8 @@
     ;; insert pairs for global key bindings here
     ("\C-cg" . magit-status)
     ([(backtab)] . dan/indent-shift-left)
+    ([(super /)] . comment-or-uncomment-region-or-line)
+    ([(super ?,)] . (lambda () (interactive) (find-file (file-chase-links "~/.emacs.d/init.el"))))
     )))
 
 
