@@ -13,10 +13,10 @@
 ;; appearance
 (load-theme 'railscasts t)
 (set-cursor-color "red")
-(setq cursor-type 'bar)
 (blink-cursor-mode -1)
 (tool-bar-mode -1)
 (dan/set-show-paren-style)
+(setq-default cursor-type 'bar)
 
 ;; misc configuration
 (setq vc-follow-symlinks t)
