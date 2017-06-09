@@ -18,6 +18,15 @@
 (dan/set-show-paren-style)
 (setq-default cursor-type 'bar)
 
+;; projectile and helm
+(use-package helm)
+(use-package projectile)
+(use-package helm-projectile)
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
+
+
+
 ;; misc configuration
 (setq vc-follow-symlinks t)
 (global-linum-mode 1)
@@ -65,6 +74,7 @@
  '(global-map
    .
    (("\C-cg" . magit-status)
+    ("\C-x\C-f" . dan/find-file)
     ([(backtab)] . dan/indent-shift-left)
     ([(super /)] . comment-or-uncomment-region-or-line)
     ([(super ?,)] . (lambda () (interactive) (find-file (file-chase-links "~/.emacs.d/init.el")))))))
