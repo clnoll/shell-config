@@ -24,7 +24,7 @@
 (use-package helm-projectile)
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
-
+(setq helm-full-frame t)
 
 
 ;; misc configuration
