@@ -1,49 +1,81 @@
 (package-initialize)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-
+(use-package helm)
+(use-package projectile)
+(use-package helm-projectile)
 (use-package magit)
+
 (use-package undo-tree
   :config
   (undo-tree-mode 1))
 
 (load-file "~/dan-emacs-config/lib.el")
 
-(server-start)
+(require 'server)
+(unless (server-running-p) (server-start))
 
 ;; appearance
 (load-theme 'railscasts t)
 (set-cursor-color "red")
 (blink-cursor-mode -1)
 (tool-bar-mode -1)
+(defun dan/set-show-paren-style ()
+  (show-paren-mode t)
+  (setq show-paren-delay .125)
+  (setq show-paren-style 'parenthesis)
+  (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+  (set-face-background 'show-paren-match (face-background 'default))
+  (set-face-attribute 'show-paren-match nil :foreground "red"))
 (dan/set-show-paren-style)
 (setq-default cursor-type 'bar)
 
 ;; projectile and helm
-(use-package helm)
-(use-package projectile)
-(use-package helm-projectile)
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
 (setq helm-full-frame t)
+
+;;; Yasnippet
+(setq yas/trigger-key [tab])
+(define-key yas/keymap [tab] 'yas/next-field)
+(yas/initialize)
+(defun dan/yas-load ()
+  (interactive)
+  (yas/load-directory "/Users/catherine/configfiles/emacs-snippets/"))
+(dan/yas-load)
+
+
+;; multiple cursors
+(advice-add 'mc/edit-lines :before (lambda (&rest args) (previous-logical-line 1 nil)))
 
 
 ;; misc configuration
 (setq vc-follow-symlinks t)
 (global-linum-mode 1)
+(setq truncate-lines t)
+(setq make-backup-files nil)
+(delete-selection-mode)
 
-;; scrolling
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
-(setq mouse-wheel-progressive-speed nil)
-(setq mouse-wheel-follow-mouse 't)
-(setq linum-delay t)
+(dan/set-exec-path-from-shell)
 
 
-;; tab completion
-(setq tab-always-indent 'complete)
+;; latex
+(defun dan/latex-mode-hook-fn ()
+  (interactive)
+  (dan/setup-paired-characters)
+  (local-set-key "\C-c\C-c" 'dan/save-even-if-not-modified)
+  (dan/set-up-outline-minor-mode "\\(\\\\sub\\|\\\\section\\)")
+  (dan/latex-watch))
+(add-hook 'latex-mode-hook 'dan/latex-mode-hook-fn)
 
-;; python
-(setq python-shell-interpreter "/usr/local/bin/ipython3"
-      python-shell-interpreter-args "-i")
+;; (setq exec-path
+;;       (append '("/usr/local/texlive/2016basic/bin/x86_64-darwin") exec-path))
+
+
+(dan/register-key-bindings
+ '(outline-minor-mode-map
+   .
+   (([(control tab)] . org-cycle)
+    ([(backtab)] . org-global-cycle))))
 
 
 ;; mode hooks
@@ -74,8 +106,11 @@
  '(global-map
    .
    (("\C-cg" . magit-status)
+    ("\C-xd" . dan/dired-no-ask)
     ("\C-x\C-f" . dan/find-file)
     ([(backtab)] . dan/indent-shift-left)
+    ([(super ?>)] . dan/helm-projectile-grep-no-input)
+    ([(super ?.)] . dan/helm-projectile-grep-thing-at-point)
     ([(super /)] . comment-or-uncomment-region-or-line)
     ([(super ?,)] . (lambda () (interactive) (find-file (file-chase-links "~/.emacs.d/init.el")))))))
 
@@ -89,6 +124,7 @@
 (setq indent-region-function 'dan/indent-shift-right)
 
 
+;; Python
 (require 'python)
 (dan/register-key-bindings
  '("python" .
@@ -96,7 +132,11 @@
     ;; insert pairs for python bindings here
     )))
 
+(defun python-hook-function ()
+  (jedi:setup)
+  (flycheck-mode))
 
+(add-hook 'python-mode-hook 'python-hook-function)
 
 
 (custom-set-variables

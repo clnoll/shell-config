@@ -70,7 +70,7 @@ __docker_compose_ps1 () {
 # Find first occurrence of file in parent directories
 __find_file_upwards () {
     local file="$1"
-    local dir=$(readlink -f "$2")
+    local dir=$(/usr/local/opt/coreutils/libexec/gnubin/readlink -f "$2")
 
     if [[ -f "$dir/$file" ]]; then
         echo "$dir/$file"
@@ -82,5 +82,6 @@ __find_file_upwards () {
 }
 
 
+export __prompt_command
 export PROMPT_COMMAND=__prompt_command
 export PS2=''

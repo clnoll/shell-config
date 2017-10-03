@@ -1,3 +1,3 @@
-export DOCKER_MACHINE_NAME=docker5
+export DOCKER_MACHINE_NAME=dockervm
 export PYTHONDONTWRITEBYTECODE=1
 export PAGER=less
