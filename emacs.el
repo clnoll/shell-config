@@ -40,7 +40,7 @@
 (yas/initialize)
 (defun dan/yas-load ()
   (interactive)
-  (yas/load-directory "/Users/catherine/configfiles/emacs-snippets/"))
+  (yas/load-directory "/Users/catherine/configfiles/emacs-snippets"))
 (dan/yas-load)
 
 
@@ -107,6 +107,7 @@
    .
    (("\C-cg" . magit-status)
     ("\C-xd" . dan/dired-no-ask)
+    ([(super ?i)] . dan/insert-ipdb-set-trace)
     ("\C-x\C-f" . dan/find-file)
     ([(backtab)] . dan/indent-shift-left)
     ([(super ?>)] . dan/helm-projectile-grep-no-input)
