@@ -27,7 +27,6 @@ cd "$_cwd"
 
 . ~/configfiles/git-functions.sh
 
-source $(which virtualenvwrapper.sh)
 export WORKON_HOME=$HOME/.virtualenvs
 alias subl="/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl"
 

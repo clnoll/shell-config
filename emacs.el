@@ -9,7 +9,7 @@
   :config
   (undo-tree-mode 1))
 
-(load-file "~/dan-emacs-config/lib.el")
+(load-file "~/configfiles/dan-emacs-config/lib.el")
 
 (require 'server)
 (unless (server-running-p) (server-start))
@@ -164,7 +164,10 @@
  '(custom-safe-themes
    (quote
     ("3b0a350918ee819dca209cec62d867678d7dac74f6195f5e3799aa206358a983" default)))
- '(inhibit-startup-screen t))
+ '(inhibit-startup-screen t)
+ '(package-selected-packages
+   (quote
+    (paredit undo-tree yasnippet use-package railscasts-theme magit helm-projectile))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
