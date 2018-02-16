@@ -29,12 +29,21 @@
 (dan/set-show-paren-style)
 (setq-default cursor-type 'bar)
 
+;;; scrolling
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+(setq scroll-step 1) ;; keyboard scroll one line at a time
+(setq linum-delay t)
+
+
 ;; projectile and helm
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
 (setq helm-full-frame t)
 
 ;;; Yasnippet
+(require 'yasnippet)
 (setq yas/trigger-key [tab])
 (define-key yas/keymap [tab] 'yas/next-field)
 (yas/initialize)
@@ -138,6 +147,13 @@
   (flycheck-mode))
 
 (add-hook 'python-mode-hook 'python-hook-function)
+
+
+;; C
+(defun c-hook-function ()
+  (setq c-basic-offset 4))
+(add-hook 'c-mode-hook 'c-hook-function)
+
 
 
 (custom-set-variables

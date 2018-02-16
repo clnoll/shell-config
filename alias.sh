@@ -120,7 +120,7 @@ alias gsw='git show --word-diff=color'
 alias h='head'
 alias hibernateoff="sudo pmset -a hibernatemode 0"
 alias hibernateon="sudo pmset -a hibernatemode 5"
-alias hist='tac ~/.bash_eternal_history'
+alias hist='cat ~/.bash_eternal_history'
 alias hubc='open https://github.counsyl.com/dev/website/commit/$(git rev-list -n1 HEAD)'
 alias ip=ipython
 alias jp=jsonpipe

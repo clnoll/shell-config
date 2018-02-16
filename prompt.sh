@@ -12,6 +12,8 @@ __prompt_command () {
     PS1+="$(__my_git_ps1)"
     PS1+="$(__docker_compose_ps1)"
     PS1+=" "
+    history 1 >> ~/.bash_eternal_history
+    echo $PWD > /tmp/cwd
 }
 
 
