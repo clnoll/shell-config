@@ -84,6 +84,5 @@ __find_file_upwards () {
 }
 
 
-export __prompt_command
 export PROMPT_COMMAND=__prompt_command
 export PS2=''

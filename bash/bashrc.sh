@@ -20,7 +20,6 @@ source alias.sh
 # source bash/alias_completion.sh
 source tmux.sh
 
-export __prompt_command
 export PROMPT_COMMAND=__prompt_command
 
 cd "$_cwd"
