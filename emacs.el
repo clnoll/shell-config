@@ -63,6 +63,7 @@
 (setq truncate-lines t)
 (setq make-backup-files nil)
 (delete-selection-mode)
+(setq create-lockfiles nil)
 
 (dan/set-exec-path-from-shell)
 
