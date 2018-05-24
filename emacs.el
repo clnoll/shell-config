@@ -41,6 +41,7 @@
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
 (setq helm-full-frame t)
+(setq dan/ignored-patterns nil)
 
 ;;; Yasnippet
 (require 'yasnippet)
@@ -168,7 +169,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (paredit undo-tree yasnippet use-package railscasts-theme magit helm-projectile))))
+    (markdown-mode paredit undo-tree yasnippet use-package railscasts-theme magit helm-projectile))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
