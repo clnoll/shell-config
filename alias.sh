@@ -5,6 +5,7 @@ alias R='R --silent --no-restore --no-save --vanilla'
 alias acurl='curl --user $(cat ~/.ssh/auth)'
 alias agp='ag --python'
 alias b='git branch-by-date|head'
+alias cat="bat --theme=\$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo default || echo GitHub)"
 alias beh='tac ~/.bash_eternal_history'
 alias c='cat'
 alias cb='cargo build'
