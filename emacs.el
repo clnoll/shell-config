@@ -35,7 +35,7 @@
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 (setq linum-delay t)
-
+(setq scroll-conservatively 10000)
 
 ;; projectile and helm
 (setq projectile-completion-system 'helm)
